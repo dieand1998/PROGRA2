@@ -1,0 +1,67 @@
+---
+title: "Histograma Interactivo del Dataset Faithful"
+author: "Generado con Quarto y Shiny"
+format: html
+server: shiny
+---
+
+## Introducción
+
+Este documento interactivo demuestra cómo usar Shiny dentro de Quarto para crear análisis dinámicos. Utilice el deslizador en la barra lateral para controlar el número de barras (bins) en el histograma de los tiempos de espera del géiser "Old Faithful".
+
+```{r setup}
+#| include: false
+# Este bloque se ejecuta una sola vez al iniciar la aplicación.
+# Es ideal para cargar librerías y datos.
+library(shiny)
+```
+
+---
+
+### {.sidebar}
+
+Aquí se encuentran los controles para manipular el gráfico.
+
+```{r}
+# Este bloque de código define un widget de entrada (input).
+# Quarto lo renderizará como un control interactivo en la barra lateral.
+sliderInput(inputId = "bins",              # El ID único que usaremos para referirnos a este valor.
+              label = "Número de barras:",   # El texto que ve el usuario.
+              min = 1,
+              max = 50,
+              value = 30)                    # El valor inicial del deslizador.
+```
+
+---
+
+### Histograma de Tiempos de Espera
+
+El siguiente gráfico es **reactivo**. Se actualizará automáticamente cada vez que muevas el deslizador.
+
+```{r}
+# Este bloque de código define una salida (output) para el gráfico.
+renderPlot({
+  
+  # Accedemos a la columna 'waiting' del dataset faithful
+  x <- faithful$waiting
+  
+  # Generamos el histograma
+  hist(x, 
+       breaks = input$bins, # El número de barras viene del deslizador de la UI.
+       col = "#75AADB", 
+       border = "white",
+       xlab = "Tiempo de espera entre erupciones (min)",
+       main = "Histograma de tiempos de espera")
+})
+```
+
+### Texto de Diagnóstico
+
+Este texto confirmará si el servidor está recibiendo la información del slider.
+
+```{r}
+# Este bloque define una salida de texto para diagnóstico.
+renderText({
+  paste("El valor actual del deslizador es:", input$bins)
+})
+```

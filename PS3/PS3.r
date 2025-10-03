@@ -16,7 +16,6 @@ setwd("C:/Users/diego/OneDrive/PES/10 Programacion II/PROGRA2/PS3/")
 rm(list = ls()) # Limpiar el entorno de R
 graphics.off()  # Cerrar gráficos abiertos
 cat("\014")     # Limpiar la consola
-gs()            # Limpiar memoria
 
 set.seed(123)   # Fijar semilla para reproducibilidad
 ################################################################################
@@ -296,3 +295,5 @@ tabla_resultados <- data.frame(
 )
 cat("\n--- Resultados de la Estimación AR(1) para la Inflación ---\n")
 tabla_resultados
+install.packages("here")
+library(here)
