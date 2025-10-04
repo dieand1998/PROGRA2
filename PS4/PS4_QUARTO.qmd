@@ -34,7 +34,6 @@ graphics.off()  # Cerrar gráficos abiertos
 cat("\014")
 direccion <-""C:/Users/David del Cid/Desktop/Programacion II/PROGRA2/PS4"" 
 setwd(direccion) # Establecer el directorio de trabajo
-
 ```
 
 ## LIMPIEZA Y VISUALIZACIÓN DE DATOS
